@@ -1,9 +1,10 @@
-#pragma once
-#ifndef INTERFACE_H
-#define INTERFACE_H
+#pragma cli
+#ifndef CLI_H
+#define CLI_H
 
 #include <string>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -13,9 +14,9 @@ using namespace std;
  * @param name option name
  * @param callback function to call when select the options
  */
-struct Options {
+struct MenuOption {
   string name;
-  void* callback;
+  void (*callback)(void);
 };
 
 /**
@@ -24,25 +25,45 @@ struct Options {
 class CLI {
   private:
   protected:
-    Options *menuOptions;
-    int menuOptionsCount;
+    vector<MenuOption> menuOptions;
 
   public:
     /**
      * Default constructor
      */
-    CLI() {}
+    CLI();
+
+    /**
+     * Constructure with menu options definitions
+     *
+     * @param options Menu options
+     */
+    CLI(vector<MenuOption> options);
 
     /**
      * Add menu options
-     * @param options Pointer to array of Options
+     *
+     * @param options Vector of menu Options
      */
-    void setMenuOptions(string *options) {}
+    void appendMenu(vector<MenuOption> options);
+
 
     /**
-     * Select menu options
+     * Reset menu
+     *
+     * @param options Vector of menu Options
      */
-    void selectFunctino() {}
+    void resetMenu(vector<MenuOption> options);
+
+    /**
+     * Select menu option
+     */
+    void selectOptions();
+
+    /**
+     * Clear console
+     */
+    void clearConsole();
 };
 
-#endif;
+#endif
