@@ -13,26 +13,28 @@ void updateCalculations() {}
 
 void previousCalculations() {}
 
+
 int main() {
-  vector<MenuOption> baseOptions {
-    {
-      "make calculations",
-      makeCalculations,
-    },
-    {
-      "update calculations",
-      updateCalculations,
-    },
-    {
-      "previous calculations",
-      previousCalculations,
-    },
-  };
+  // vector<MenuOption> baseOptions {
+  //   {
+  //     "make calculations",
+  //     makeCalculations,
+  //   },
+  //   {
+  //     "update calculations",
+  //     updateCalculations,
+  //   },
+  //   {
+  //     "previous calculations",
+  //     previousCalculations,
+  //   },
+  // };
 
-  CLI cli = CLI(baseOptions);
-  // CLI cli = CLI();
+  // CLI cli = CLI(baseOptions);
+  // // CLI cli = CLI();
 
-  cli.selectOptions();
+  // cli.selectOptions();
+
 
   return 0;
 }

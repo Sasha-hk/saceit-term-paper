@@ -1,6 +1,10 @@
 {
   "files.associations": {
     ".env": "plaintext",
-    "iostream": "cpp"
+    "iostream": "cpp",
+    "ostream": "cpp",
+    "iosfwd": "cpp",
+    "exception": "cpp",
+    "termkey-cli.c": "cpp"
   }
 }
