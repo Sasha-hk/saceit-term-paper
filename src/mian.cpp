@@ -13,27 +13,35 @@ void updateCalculations() {}
 
 void previousCalculations() {}
 
+void exitFunction() {
+  exit(0);
+}
 
 int main() {
-  // vector<MenuOption> baseOptions {
-  //   {
-  //     "make calculations",
-  //     makeCalculations,
-  //   },
-  //   {
-  //     "update calculations",
-  //     updateCalculations,
-  //   },
-  //   {
-  //     "previous calculations",
-  //     previousCalculations,
-  //   },
-  // };
+  vector<MenuOption> baseOptions {
+    {
+      "make calculations",
+      makeCalculations,
+    },
+    {
+      "update calculations",
+      updateCalculations,
+    },
+    {
+      "previous calculations",
+      previousCalculations,
+    },
+    {
+      "exit",
+      exitFunction,
+    }
+  };
 
-  // CLI cli = CLI(baseOptions);
-  // // CLI cli = CLI();
+  CLI cli = CLI(baseOptions);
 
-  // cli.selectOptions();
+  while (true) {
+    cli.selectOptions();
+  }
 
 
   return 0;

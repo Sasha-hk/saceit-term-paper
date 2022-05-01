@@ -64,6 +64,11 @@ class CLI {
      * Clear console
      */
     void clearConsole();
+
+    /**
+     * Further after execution menu option callback
+     */
+    int further();
 };
 
 #endif

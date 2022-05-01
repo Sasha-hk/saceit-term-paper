@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <ncurses.h>
 
 using namespace std;
 
@@ -25,15 +24,37 @@ void CLI::selectOptions() {
 
   cout << "Select option:" << endl << endl;
 
-  // for (int i = 0; i < menuOptions.size(); i++) {
-  //   cout << " > " << menuOptions[i].name << endl;
-  // }
-
-  for (MenuOption option : menuOptions) {
-    cout << " > " << option.name << endl;
+  for (int i = 0; i < menuOptions.size(); i++) {
+    cout << " " << i + 1 << " - " << menuOptions[i].name << endl;
   }
+
+  int choice;
+
+  while (true) {
+    cout << endl << " > ";
+
+    cin >> choice;
+
+    if (choice - 1 < menuOptions.size() && choice >= 1) {
+      break;
+    }
+  }
+
+  clearConsole();
+  menuOptions[choice - 1].callback();
+
+  further();
 }
 
 void CLI::clearConsole() {
   cout << "\x1B[2J\x1B[H";
+}
+
+int CLI::further() {
+  string input;
+  cout << "\nPress enter to continue ";
+  getline(cin, input);
+  cin.ignore();
+
+  return 0;
 }
