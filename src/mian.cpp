@@ -1,4 +1,5 @@
 #include "cli.cpp"
+#include "algorithm.cpp"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -6,7 +7,9 @@
 using namespace std;
 
 void makeCalculations() {
-  cout << "Hello from function" << endl;
+  JordanGauss algorithm = JordanGauss();
+
+  algorithm.calculate();
 }
 
 void updateCalculations() {}
@@ -42,7 +45,6 @@ int main() {
   while (true) {
     cli.selectOptions();
   }
-
 
   return 0;
 }
