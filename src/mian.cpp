@@ -1,4 +1,4 @@
-#include "cli.cpp"
+#include "ui.cpp"
 #include "algorithm.cpp"
 #include <iostream>
 #include <vector>
@@ -40,7 +40,7 @@ int main() {
     }
   };
 
-  CLI cli = CLI(baseOptions);
+  UI cli = UI(baseOptions);
 
   while (true) {
     cli.selectOptions();

@@ -1,6 +1,6 @@
-#pragma cli
-#ifndef CLI_H
-#define CLI_H
+#pragma ui
+#ifndef UI_H
+#define UI_H
 
 #include <string>
 #include <iostream>
@@ -22,7 +22,7 @@ struct MenuOption {
 /**
  * Universal command line interface
  */
-class CLI {
+class UI {
   private:
   protected:
     vector<MenuOption> menuOptions;
@@ -31,14 +31,14 @@ class CLI {
     /**
      * Default constructor
      */
-    CLI();
+    UI();
 
     /**
      * Constructure with menu options definitions
      *
      * @param options Menu options
      */
-    CLI(vector<MenuOption> options);
+    UI(vector<MenuOption> options);
 
     /**
      * Add menu options

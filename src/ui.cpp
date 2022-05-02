@@ -1,25 +1,25 @@
-#include "cli.h"
+#include "ui.h"
 #include <iostream>
 #include <string>
 #include <vector>
 
 using namespace std;
 
-CLI::CLI() {}
+UI::UI() {}
 
-CLI::CLI(vector<MenuOption> options) {
+UI::UI(vector<MenuOption> options) {
   this->menuOptions = options;
 }
 
-void CLI::appendMenu(vector<MenuOption> options) {
+void UI::appendMenu(vector<MenuOption> options) {
   this->menuOptions.assign(options.end(), options.begin());
 }
 
-void CLI::resetMenu(vector<MenuOption> options) {
+void UI::resetMenu(vector<MenuOption> options) {
   this->menuOptions = options;
 }
 
-void CLI::selectOptions() {
+void UI::selectOptions() {
   clearConsole();
 
   cout << "Select option:" << endl << endl;
@@ -46,11 +46,11 @@ void CLI::selectOptions() {
   further();
 }
 
-void CLI::clearConsole() {
+void UI::clearConsole() {
   cout << "\x1B[2J\x1B[H";
 }
 
-int CLI::further() {
+int UI::further() {
   string input;
   cout << "\nPress enter to continue ";
   getline(cin, input);
