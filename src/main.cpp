@@ -1,8 +1,8 @@
 #include "ui.cpp"
 #include "algorithm.cpp"
-#include <iostream>
 #include <vector>
 #include <string>
+#include <ncurses.h>
 
 using namespace std;
 
@@ -42,9 +42,18 @@ int main() {
 
   UI cli = UI(baseOptions);
 
+  // Setup ncurses
+  initscr();
+  raw();
+  keypad(stdscr, TRUE);
+  noecho();
+
   while (true) {
     cli.selectOptions();
   }
+
+  refresh();
+  endwin();
 
   return 0;
 }

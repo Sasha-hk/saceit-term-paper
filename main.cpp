@@ -13,7 +13,7 @@ int main() {
 
   while ((ch = getch()) != '.') {
     if(ch == KEY_F(1)){
-      printw("F1 Key pressed");
+      printw("F1 Key pressed\n");
     }
     else {
       printw("The pressed key is ");
@@ -21,8 +21,6 @@ int main() {
       printw("%c", ch);
       attroff(A_BOLD);
     }
-
-    refresh();
   }
 
   refresh();

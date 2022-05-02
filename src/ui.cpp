@@ -1,7 +1,7 @@
 #include "ui.h"
-#include <iostream>
 #include <string>
 #include <vector>
+#include <ncurses.h>
 
 using namespace std;
 
@@ -22,18 +22,18 @@ void UI::resetMenu(vector<MenuOption> options) {
 void UI::selectOptions() {
   clearConsole();
 
-  cout << "Select option:" << endl << endl;
+  printw("Select options: \n");
 
   for (int i = 0; i < menuOptions.size(); i++) {
-    cout << " " << i + 1 << " - " << menuOptions[i].name << endl;
+    printw(" ", i + 1, " - ", menuOptions[i].name);
   }
 
   int choice;
 
   while (true) {
-    cout << endl << " > ";
+    printw(" > \n");
 
-    cin >> choice;
+    choice = getch();
 
     if (choice - 1 < menuOptions.size() && choice >= 1) {
       break;
@@ -47,14 +47,12 @@ void UI::selectOptions() {
 }
 
 void UI::clearConsole() {
-  cout << "\x1B[2J\x1B[H";
+  clear();
 }
 
 int UI::further() {
-  string input;
-  cout << "\nPress enter to continue ";
-  getline(cin, input);
-  cin.ignore();
+  int input;
+  input = getch();
 
   return 0;
 }
