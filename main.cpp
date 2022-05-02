@@ -1,45 +1,33 @@
-#include <string>
 #include <iostream>
+#include <ncurses.h>
 
 using namespace std;
 
-class Input {
-  public:
-    /**
-     * Default constructor
-     */
-    Input() {}
-
-    /**
-     * Get input
-     *
-     * @param message string to show before input
-     * @param end get input from new line or not
-     */
-    template <class inputT>
-    inputT input(string message) {
-      bool end = false;
-      inputT out;
-
-      if (end) {
-        cout << message << endl;
-      } else {
-        cout << message;
-      }
-
-      cin >> out;
-
-      return out;
-    }
-};
-
 int main() {
-  int x;
+  int ch;
 
-  Input y = Input();
+	initscr();
+	raw();
+	keypad(stdscr, TRUE);
+	noecho();
+  printw("Type any character to see it in bold\n");
 
-  x = y.input<int>(":");
+  while ((ch = getch()) != '.') {
+    if(ch == KEY_F(1)){
+      printw("F1 Key pressed");
+    }
+    else {
+      printw("The pressed key is ");
+      attron(A_BOLD);
+      printw("%c", ch);
+      attroff(A_BOLD);
+    }
 
-  cout << x << endl;
+    refresh();
+  }
 
+  refresh();
+  endwin();
+
+  return 0;
 }
