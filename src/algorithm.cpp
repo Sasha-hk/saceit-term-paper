@@ -1,7 +1,7 @@
-#include <iostream>
 #include <iomanip>
 #include <math.h>
 #include <stdlib.h>
+#include <ncurses.h>
 
 using namespace std;
 
@@ -10,11 +10,16 @@ class JordanGauss {
     JordanGauss() {}
 
     void calculate() {
+      echo();
+      cbreak();
       int n, i, j, k;
       float ratio;
 
-      cout << "Size: ";
-      cin >> n;
+      char nString[10];
+      printw("Size: ");
+      getstr(nString);
+
+      n = atoi(nString);
 
       // Prepare data structures
       float **matrix = new float*[n];
@@ -27,14 +32,19 @@ class JordanGauss {
       // Fill matrix
       for (i = 1; i <= n; i++) {
         for (j = 1; j <= n + 1; j++) {
-          cout << "a[" << i << "]" << j << "]= ";
+          cout << "\na[" << i << "]" << j << "]= ";
+          printw("a[");
+          printw(to_string(i).c_str());
+          printw("]");
+          printw(to_string(j).c_str());
+          printw("]= ");
           cin >> matrix[i][j];
         }
       }
 
       for (i = 1; i <= n; i++) {
         if (matrix[i][i] == 0.0) {
-          cout << "Mathematical Error!";
+          printw("Mathematical Error!");
           exit(0);
         }
 
@@ -53,10 +63,14 @@ class JordanGauss {
         solution[i] = matrix[i][n + 1] / matrix[i][i];
       }
 
-      cout << endl << "Solution: " << endl;
+      printw("Solutions: ");
 
       for (i = 1; i <= n; i++) {
-        cout << "x[" << i << "] = " << solution[i] << endl;
+        printw("x[");
+        printw(to_string(i).c_str());
+        printw("] = ");
+        printw(to_string(solution[i]).c_str());
+        printw("\n");
       }
     }
 };

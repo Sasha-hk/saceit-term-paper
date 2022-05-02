@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <ncurses.h>
 
 using namespace std;
 
@@ -24,6 +25,12 @@ struct MenuOption {
  */
 class UI {
   private:
+    /**
+     * Show menu
+     * @param active active option
+     */
+    void showMenu(int active);
+
   protected:
     vector<MenuOption> menuOptions;
 
@@ -59,16 +66,6 @@ class UI {
      * Select menu option
      */
     void selectOptions();
-
-    /**
-     * Clear console
-     */
-    void clearConsole();
-
-    /**
-     * Further after execution menu option callback
-     */
-    int further();
 };
 
 #endif

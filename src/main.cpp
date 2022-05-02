@@ -2,7 +2,9 @@
 #include "algorithm.cpp"
 #include <vector>
 #include <string>
+#include <cstring>
 #include <ncurses.h>
+#include <iostream>
 
 using namespace std;
 
@@ -17,6 +19,8 @@ void updateCalculations() {}
 void previousCalculations() {}
 
 void exitFunction() {
+  refresh();
+  endwin();
   exit(0);
 }
 
