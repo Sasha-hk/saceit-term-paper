@@ -1,65 +1,96 @@
+#include "stack.h"
 #include <iostream>
 #include <iomanip>
 #include <math.h>
 #include <stdlib.h>
+#include <ctime>
 
 using namespace std;
 
+/**
+ * Structure to store matrix data
+ *
+ * @param dataLength data length
+ * @param data to calculate
+ * @param solutionsLength solutions length
+ * @param solutions solutions
+ */
+struct SaveResult {
+  int dataLength;
+  int** data;
+  int solutionsLength;
+  int* solutions;
+  string date;
+};
+
+/**
+ * Implementation Jordan Gauss algorithm
+ */
 class JordanGauss {
+  protected:
+    Stack<SaveResult> history;
+
   public:
-    JordanGauss() {}
+    JordanGauss() {
+    //  this->history = Stack<SaveResult>(10);
+    }
 
     void calculate() {
-      int n, i, j, k;
-      float ratio;
+      int ratio;
+      int i, j, k, length;
 
-      cout << "Size: ";
-      cin >> n;
+      float data[10][10];
+      int solutions[10 + 1];
 
-      // Prepare data structures
-      float **matrix = new float*[n];
-      float *solution = new float[n + 1];
+      cout << setprecision(3) << fixed;
 
-      for (int i = 0; i <= n; i++) {
-        matrix[i] = new float[n];
-      }
+      cout << "Enter number of unknowns: ";
+      cin >> length;
 
-      // Fill matrix
-      for (i = 1; i <= n; i++) {
-        for (j = 1; j <= n + 1; j++) {
+      cout << "Enter Coefficients of Augmented Matrix: " << endl;
+      for (i = 1; i <= length; i++) {
+        for (j = 1; j <= length + 1; j++) {
           cout << "a[" << i << "]" << j << "]= ";
-          cin >> matrix[i][j];
+          cin >> data[i][j];
         }
       }
 
-      for (i = 1; i <= n; i++) {
-        if (matrix[i][i] == 0.0) {
+      for (i = 1; i <= length; i++) {
+        if (data[i][i] == 0.0) {
           cout << "Mathematical Error!";
           exit(0);
         }
 
-        for (j = 1; j <= n; j++) {
+        for (j = 1; j <= length; j++) {
           if (i != j) {
-            ratio = matrix[j][i] / matrix[i][i];
+            ratio = data[j][i] / data[i][i];
 
-            for (k = 1; k <= n + 1; k++) {
-              matrix[j][k] = matrix[j][k] - ratio * matrix[i][k];
+            for (k = 1; k <= length + 1; k++) {
+              data[j][k] = data[j][k] - ratio * data[i][k];
             }
           }
         }
       }
 
-      for (i = 1; i <= n; i++) {
-        solution[i] = matrix[i][n + 1] / matrix[i][i];
+      for (i = 1; i <= length; i++) {
+        solutions[i] = data[i][length + 1] / data[i][i];
       }
 
       cout << endl << "Solution: " << endl;
 
-      for (i = 1; i <= n; i++) {
-        cout << "x[" << i << "] = " << solution[i] << endl;
+      for (i = 1; i <= length; i++) {
+        cout << "x[" << i << "] = " << solutions[i] << endl;
       }
     }
 };
+
+      // SaveResult save;
+      // save.dataLength = n;
+      // // save.data;
+      // save.solutionsLength = n + 1;
+
+      // unixTime = time(NULL);
+      // TIME = *localtime(&unixTime);
 
 // int main() {
 //   float a[SIZE][SIZE];
