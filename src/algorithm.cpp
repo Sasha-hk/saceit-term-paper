@@ -13,6 +13,7 @@ struct CalculationDump {
   vector<vector<float>> data;
   vector<float> solutions;
   string datetime;
+  int n;
 };
 
 /**
@@ -27,8 +28,12 @@ class JordanGauss {
       storyDump = Stack<CalculationDump>(10);
     }
 
+    /**
+     * Make new calculation with user input
+     */
     void calculate() {
       int n, i, j, k;
+      float tmp;
 
       cout.precision(4);
       cout.setf(ios::fixed);
@@ -39,17 +44,67 @@ class JordanGauss {
       vector<vector<float>> data (n + 1);
       vector<float> solutions (n);
 
-      for (int i = 0; i < n; i++) {
-        data[i].push_back(0);
-      }
-
+      // Enter data
       cout << "Enter the elements:\n";
       for (i = 0; i < n; i++) {
         for (j = 0; j <= n; j++) {
           cout << " data[" << i << "][" << j << "]: ";
-          cin>>data[i][j];
+          cin >> tmp;
+          data[i].push_back(tmp);
         }
       }
+
+      // Make calculations
+      CalculationDump dump = solve(data, solutions, n);
+
+      solutions = dump.solutions;
+
+      // Show solutions
+      cout << endl << "Solutions:" << endl;
+      for (i = 0; i < n; i++) {
+        cout << solutions[i] << endl;
+      }
+
+      saveDump(dump);
+    }
+
+    /**
+     * Make calculation based on dump
+     * @param dump previous caldulatoin
+     */
+    void seePrevious(CalculationDump dump) {
+      vector<vector<float>> data = dump.data;
+      vector<float> solutions = dump.solutions;
+      int n = dump.n;
+
+      cout << "Time: " << dump.datetime << endl << endl;
+
+      cout << "Enter the elements:\n";
+      for (int i = 0; i < data.size(); i++) {
+        for (int j = 0; j < data[i].size(); j++) {
+          cout << " data[" << i << "][" << j << "]: " << data[i][j] << endl;
+        }
+      }
+
+      cout << endl << "Solutions:" << endl;
+      for (int i = 0; i < n; i++) {
+        cout << solutions[i] << endl;
+      }
+    }
+
+    /**
+     * Solve Jordan Gauss algorithm
+     *
+     * @param data data
+     * @param solutions solutions
+     * @param n n
+     */
+    CalculationDump solve(
+      vector<vector<float>> data,
+      vector<float> solutions,
+      int n
+    ) {
+      int i, j, k;
 
       for (i=0; i < n; i++) {
         for (k = i + 1; k < n; k++) {
@@ -84,12 +139,7 @@ class JordanGauss {
         solutions[i] = solutions[i] / data[i][i];
       }
 
-      cout << endl << "Solutions:" << endl;
-      for (i = 0; i < n; i++) {
-        cout << solutions[i] << endl;
-      }
-
-      makeDump(data, solutions);
+      return makeDump(data, solutions, n);
     }
 
     /**
@@ -98,25 +148,42 @@ class JordanGauss {
      * @param date date
      * @param solutions solutions
      */
-    void makeDump(
+    CalculationDump makeDump(
       vector<vector<float>> data,
-      vector<float> solutions
+      vector<float> solutions,
+      int n
     ) {
       Date date = Date();
 
-      storyDump.push({
+      return {
         data,
         solutions,
         date.getString(),
-      });
+        n,
+      };
     }
+
 
     /**
      * Make calculations dump
      *
      * @param dump CalculationDump
      */
-    void makeDump(CalculationDump dump) {
+    void saveDump(CalculationDump dump) {
       storyDump.push(dump);
+    }
+
+    /**
+     * Get latest dump
+     */
+    CalculationDump popStory() {
+      return storyDump.pop();
+    }
+
+    /**
+     * Get dump size
+     */
+    int dumpSize() {
+      return storyDump.getTop();
     }
 };
