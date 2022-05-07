@@ -1,4 +1,5 @@
-#include "stack.h"
+#include "../lib/stack.h"
+#include "../lib/date.h"
 #include <iostream>
 #include <iomanip>
 #include <math.h>
@@ -11,7 +12,7 @@ using namespace std;
 struct StoryDump {
   vector<vector<float>> data;
   vector<float> solutions;
-
+  string datetime;
 };
 
 /**
@@ -19,11 +20,11 @@ struct StoryDump {
  */
 class JordanGauss {
   protected:
-    Stack<int> storyDump;
+    Stack<StoryDump> storyDump;
 
   public:
     JordanGauss() {
-     this->storyDump = Stack<int>(10);
+      storyDump = Stack<StoryDump>(10);
     }
 
     void calculate() {
@@ -104,5 +105,20 @@ class JordanGauss {
       for (i = 0; i < n; i++) {
         cout << x[i] << endl;
       }
+
+      makeDump(a, x);
+    }
+
+    void makeDump(
+      vector<vector<float>> data,
+      vector<float> solutions
+    ) {
+      Date date = Date();
+
+      storyDump.push({
+        data,
+        solutions,
+        date.getString(),
+      });
     }
 };

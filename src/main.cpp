@@ -1,4 +1,5 @@
-#include "cli.h"
+#include "../lib/cli.h"
+#include "../lib/stack.h"
 #include "algorithm.cpp"
 #include <iostream>
 #include <vector>
@@ -17,8 +18,8 @@ void exitFunction() {
 }
 
 int main() {
-  // Define menu options
-  vector<MenuOption> baseOptions {
+  // Create CLI instance
+  CLI cli = CLI({
     {
       "make calculations",
       makeCalculations,
@@ -27,10 +28,7 @@ int main() {
       "exit",
       exitFunction,
     }
-  };
-
-  // Create cli instance
-  CLI cli = CLI(baseOptions);
+  });
 
   while (true) {
     cli.selectOptions();

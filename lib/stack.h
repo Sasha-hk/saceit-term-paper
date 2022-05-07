@@ -2,12 +2,17 @@
 #ifndef STACK_H
 #define STACK_H
 
+#include <vector>
+
+using std::vector;
+
 /**
  * Stack data structure
  */
 template <class Type> class Stack {
   private:
-    Type* stack;
+    vector<Type> stack;
+
   protected:
     int capacity;
     int top;
@@ -28,7 +33,7 @@ template <class Type> class Stack {
     Stack(int capacity) {
       this->top = 0;
       this->capacity = capacity;
-      this->stack = new Type[this->capacity];
+      this->stack = vector<Type>(capacity);
     }
 
     /**
@@ -36,30 +41,13 @@ template <class Type> class Stack {
      * @param data Data
      */
     void push(Type data) {
-      // Check if stack size enough
-      if (this->capacity != this->top) {
-        this->stack[this->top] = data;
+      if (top == capacity) {
+        this->stack.push_back(data);
         this->top++;
       }
       else {
-        // Create new pointer to save old stack
-        Type* temp = this->stack;
-        this->capacity *= 2;
-
-        // Create new stack twice large
-        this->stack = new Type[this->capacity];
-
-        // Copy old stack to new
-        for (int i = 0; i < top; i++) {
-          this->stack[i] = temp[i];
-        }
-
-        // Delete old stack
-        delete[] temp;
-
-        // Push data
         this->stack[this->top] = data;
-        top++;
+        this->top++;
       }
     }
 
@@ -97,13 +85,6 @@ template <class Type> class Stack {
      */
     int size() {
       return this->capacity;
-    }
-
-    /**
-     * Stack destructor
-     */
-    ~Stack() {
-      delete[] stack;
     }
 };
 
