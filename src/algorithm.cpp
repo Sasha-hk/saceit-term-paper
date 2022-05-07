@@ -9,7 +9,7 @@
 
 using namespace std;
 
-struct StoryDump {
+struct CalculationDump {
   vector<vector<float>> data;
   vector<float> solutions;
   string datetime;
@@ -20,11 +20,11 @@ struct StoryDump {
  */
 class JordanGauss {
   protected:
-    Stack<StoryDump> storyDump;
+    Stack<CalculationDump> storyDump;
 
   public:
     JordanGauss() {
-      storyDump = Stack<StoryDump>(10);
+      storyDump = Stack<CalculationDump>(10);
     }
 
     void calculate() {
@@ -50,18 +50,6 @@ class JordanGauss {
         }
       }
 
-      for (i=0; i < n; i++) {
-        for (k = i + 1; k < n; k++) {
-          if (abs(a[i][i]) < abs(a[k][i])) {
-            for (j = 0; j <= n; j++) {
-              double temp = a[i][j];
-              a[i][j] = a[k][j];
-              a[k][j] = temp;
-            }
-          }
-        }
-      }
-
       cout << "\nThe matrix after Pivotisation is:\n";
       for (i = 0; i < n; i++) {
         for (j = 0; j <= n; j++) {
@@ -71,11 +59,45 @@ class JordanGauss {
         cout << "\n";
       }
 
+      cout<<"\nThe values of the variables are as follows:\n";
+      for (i = 0; i < n; i++) {
+        cout << x[i] << endl;
+      }
+
+      makeDump(a, x);
+    }
+
+    CalculationDump solve(
+      int n,
+      vector<vector<float>> data,
+      vector<float> solutions
+    ) {
+      int i, j, k;
+
+      cout.precision(4);
+      cout.setf(ios::fixed);
+
+      for (int i = 0; i < n; i++) {
+        data[i].push_back(0);
+      }
+
+      for (i=0; i < n; i++) {
+        for (k = i + 1; k < n; k++) {
+          if (abs(data[i][i]) < abs(data[k][i])) {
+            for (j = 0; j <= n; j++) {
+              double temp = data[i][j];
+              data[i][j] = data[k][j];
+              data[k][j] = temp;
+            }
+          }
+        }
+      }
+
       for (i = 0; i < n - 1; i++) {
         for (k = i + 1; k < n; k++) {
-          double t = a[k][i] / a[i][i];
+          double t = data[k][i] / data[i][i];
           for (j = 0; j <= n; j++) {
-            a[k][j] = a[k][j] - t * a[i][j];
+            data[k][j] = data[k][j] - t * data[i][j];
           }
         }
       }
@@ -83,30 +105,31 @@ class JordanGauss {
       cout << "\n\nThe matrix after gauss-elimination is as follows:\n";
       for (i = 0; i < n; i++) {
         for (j = 0; j <= n; j++) {
-          cout << a[i][j] << setw(16);
+          cout << data[i][j] << setw(16);
         }
 
         cout << "\n";
       }
 
       for (i = n - 1; i >= 0; i--) {
-        x[i]=a[i][n];
+        solutions[i]=data[i][n];
 
         for (j = i + 1; j < n; j++) {
           if (j != i) {
-            x[i] = x[i] - a[i][j] * x[j];
+            solutions[i] = solutions[i] - data[i][j] * solutions[j];
           }
         }
 
-        x[i] = x[i] / a[i][i];
+        solutions[i] = solutions[i] / data[i][i];
       }
 
-      cout<<"\nThe values of the variables are as follows:\n";
-      for (i = 0; i < n; i++) {
-        cout << x[i] << endl;
-      }
+      Date date = Date();
 
-      makeDump(a, x);
+      return {
+        data,
+        solutions,
+        date.getString(),
+      };
     }
 
     void makeDump(

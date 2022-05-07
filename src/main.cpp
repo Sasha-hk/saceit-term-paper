@@ -7,8 +7,26 @@
 
 using namespace std;
 
+// Define menu handlers
+void makeCalculations();
+void exitFunction();
+
+// Solver for Jordan Gauss's algorithm
 JordanGauss algorithm = JordanGauss();
 
+// CLI instance
+CLI cli = CLI({
+  {
+    "make calculations",
+    makeCalculations,
+  },
+  {
+    "exit",
+    exitFunction,
+  }
+});
+
+// Menu handlers
 void makeCalculations() {
   algorithm.calculate();
 }
@@ -18,17 +36,6 @@ void exitFunction() {
 }
 
 int main() {
-  // Create CLI instance
-  CLI cli = CLI({
-    {
-      "make calculations",
-      makeCalculations,
-    },
-    {
-      "exit",
-      exitFunction,
-    }
-  });
 
   while (true) {
     cli.selectOptions();
