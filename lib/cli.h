@@ -92,10 +92,43 @@ class CLI {
     }
 
     /**
+     * Select menu option
+     *
+     * @param menuOptions menu options
+     */
+    void selectOptions(vector<MenuOption> menuOptions) {
+      clearConsole();
+
+      cout << "Select option:" << endl << endl;
+
+      for (int i = 0; i < menuOptions.size(); i++) {
+        cout << " " << i + 1 << " - " << menuOptions[i].name << endl;
+      }
+
+      int choice;
+
+      while (true) {
+        cout << endl << " > ";
+
+        cin >> choice;
+
+        if (choice - 1 < menuOptions.size() && choice >= 1) {
+          break;
+        }
+      }
+
+      clearConsole();
+
+      menuOptions[choice - 1].callback();
+
+      further();
+    }
+
+    /**
      * Clear console
      */
     void clearConsole() {
-      cout << "\x1B[2J\x1B[H";
+      system("clear");
     }
 
     /**
