@@ -12,8 +12,6 @@ using std::vector;
 template <class Type> class Stack {
   private:
     vector<Type> stack;
-
-  protected:
     int capacity;
     int top;
 
@@ -67,7 +65,7 @@ template <class Type> class Stack {
     }
 
     /**
-     * Get current max
+     * Check if stack is full
      */
     bool isFull() {
       return this->capacity == this->top;
@@ -81,10 +79,17 @@ template <class Type> class Stack {
     }
 
     /**
-     * Check if stack is empty
+     * Get currect max size
      */
     int size() {
       return this->capacity;
+    }
+
+    /**
+     * Get current top
+     */
+    int getTop() {
+      return this->top;
     }
 };
 
