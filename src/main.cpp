@@ -6,33 +6,22 @@
 
 using namespace std;
 
-void makeCalculations() {
-  JordanGauss algorithm = JordanGauss();
+JordanGauss algorithm = JordanGauss();
 
+void makeCalculations() {
   algorithm.calculate();
 }
-
-void updateCalculations() {}
-
-void previousCalculations() {}
 
 void exitFunction() {
   exit(0);
 }
 
 int main() {
+  // Define menu options
   vector<MenuOption> baseOptions {
     {
       "make calculations",
       makeCalculations,
-    },
-    {
-      "update calculations",
-      updateCalculations,
-    },
-    {
-      "previous calculations",
-      previousCalculations,
     },
     {
       "exit",
@@ -40,6 +29,7 @@ int main() {
     }
   };
 
+  // Create cli instance
   CLI cli = CLI(baseOptions);
 
   while (true) {
