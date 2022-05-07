@@ -1,5 +1,4 @@
 #include "../lib/cli.h"
-#include "../lib/stack.h"
 #include "algorithm.cpp"
 
 using namespace std;
