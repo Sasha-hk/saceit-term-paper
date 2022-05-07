@@ -26,7 +26,7 @@ void seePrevious() {
 }
 
 int main() {
-  vector<MenuOption> extendedOptons = {
+  vector<MenuOption> extendedOptions = {
     {
       "make calculations",
       makeCalculations,
@@ -55,7 +55,7 @@ int main() {
 
   while (true) {
     if (algorithm.dumpSize() > 0) {
-      cli.selectOptions(extendedOptons);
+      cli.selectOptions(extendedOptions);
     }
     else {
       cli.selectOptions();
