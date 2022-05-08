@@ -7,8 +7,20 @@
 
 ## Compile and run
 
-Run the following:
+Compilation:
 
 ```sh
-g++ ./src/main.cpp -o main && ./main
+make
+```
+
+Run:
+
+```sh
+./main
+```
+
+Shorter way:
+
+```sh
+make && ./main
 ```
