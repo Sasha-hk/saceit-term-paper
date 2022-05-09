@@ -519,7 +519,6 @@ class Date {
       return false;
     }
 
-
     /**
      * Overload >= operator
      */
