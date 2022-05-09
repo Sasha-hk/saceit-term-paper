@@ -12,18 +12,6 @@
 Compilation:
 
 ```sh
-make
-```
-
-Run:
-
-```sh
-./main
-```
-
-Shorter way:
-
-```sh
 make && ./main
 ```
 
