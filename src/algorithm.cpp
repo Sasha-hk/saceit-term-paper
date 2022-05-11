@@ -1,5 +1,5 @@
-#include "../include/stack.hpp"
-#include "../include/date.hpp"
+#include "../include/stack.h"
+#include "../include/date.h"
 #include <iostream>
 #include <iomanip>
 #include <math.h>
