@@ -271,7 +271,7 @@ class Date {
      * @return month
      */
     int getMonth() {
-      return TIME.tm_mon + 1;
+      return TIME.tm_mon;
     }
 
     /**

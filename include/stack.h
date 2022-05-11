@@ -20,7 +20,7 @@ template <class Type> class Stack {
      * Defalt constructor
      */
     Stack() {
-      this->capacity = 0;
+      this->capacity = 10;
       this->top = 0;
     }
 
@@ -40,7 +40,8 @@ template <class Type> class Stack {
      */
     void push(Type data) {
       if (top == capacity) {
-        this->stack.push_back(data);
+        this->capacity = capacity * 2;
+        this->stack[top] = data;
         this->top++;
       }
       else {
