@@ -1,5 +1,8 @@
 CC=g++
 CFLAGS=-g -w -Wall
+BUILD_DIR = build
+TEST_DIR = test
+BIN_DIR = ./test
 
 .PHONY: main test
 
